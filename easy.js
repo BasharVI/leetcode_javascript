@@ -65,9 +65,9 @@ const removeElement = (nums, val) => {
 // 344. Reverse a String
 
 const reverseString = (str) => {
+  /*--------str.reverse() can also be used-----*/
   let left = 0;
   let right = str.length - 1;
-  //str.reverse() can also be used
   while (left < right) {
     [str[left], str[right]] = [str[right], str[left]];
     right--;
