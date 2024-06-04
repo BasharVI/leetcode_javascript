@@ -75,3 +75,26 @@ const reverseString = (str) => {
   }
   return str;
 };
+
+// 409. Longest Palindrome
+
+const longestPalindrome = (s) => {
+  const freq = {};
+  for (const char of s) {
+    freq[char] = (freq[char] || 0) + 1;
+  }
+  let length = 0;
+  let odd_found = false;
+  for (const count of Object.values(freq)) {
+    if (count % 2 === 0) {
+      length += count;
+    } else {
+      length += count - 1;
+      odd_found = true;
+    }
+  }
+  if (odd_found) {
+    length += 1;
+  }
+  return length;
+};
