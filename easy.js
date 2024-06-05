@@ -98,3 +98,18 @@ const longestPalindrome = (s) => {
   }
   return length;
 };
+
+// 1002. Find Common Characters
+
+const commonChar = (words) => {
+  let result = [];
+  for (let char of words[0]) {
+    if (words.every((word) => word.includes(char))) {
+      result.push(char);
+      words.map((word) => word.replace(char, ""));
+    }
+  }
+  return result;
+};
+
+console.log(commonChar(["bella", "label", "roller"]));
