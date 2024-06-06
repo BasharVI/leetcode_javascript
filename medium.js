@@ -40,7 +40,34 @@ while (result !== null) {
   output.push(result.val);
   result = result.next;
 }
-console.log(output);
+
+// 846. Hand of Straights
+
+const isNStraightHand = (hand, groupSize) => {
+  const freqMap = new Map();
+  hand.sort((a, b) => a - b);
+
+  for (const card of hand) {
+    freqMap.set(card, (freqMap.get(card) || 0) + 1);
+  }
+
+  if (hand.length % groupSize !== 0) {
+    return false;
+  }
+
+  for (const [card, freq] of freqMap) {
+    if (freq > 0) {
+      for (let i = 0; i < groupSize; i++) {
+        const nextCard = card + i;
+        if (!freqMap.has(nextCard) || freqMap.get(nextCard) < freq) {
+          return false;
+        }
+        freqMap.set(nextCard, freqMap.get(nextCard) - freq);
+      }
+    }
+  }
+  return true;
+};
 
 // 2486. Append Characters to strinng to make subsequence
 
@@ -53,5 +80,3 @@ const appendCharacters = (s, t) => {
   }
   return t.length - j;
 };
-
-console.log(appendCharacters("coaching", "coding"));
