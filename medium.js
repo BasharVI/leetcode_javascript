@@ -1,8 +1,10 @@
 // 2. Add Two numbers
 
-function ListNode(val) {
-  this.val = val;
-  this.next = null;
+class ListNode {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
 }
 
 var addTwoNumbers = function (l1, l2) {
