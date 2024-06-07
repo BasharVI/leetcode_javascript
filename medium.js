@@ -41,6 +41,21 @@ while (result !== null) {
   result = result.next;
 }
 
+// 648. Replace Words
+
+const replaceWords = (dictionary, sentence) => {
+  const words = sentence.split(" ");
+
+  for (let i = 0; i < words.length; i++) {
+    for (let root of dictionary) {
+      if (words[i].startsWith(root)) {
+        words[i] = root;
+      }
+    }
+  }
+  return words.join(" ");
+};
+
 // 846. Hand of Straights
 
 const isNStraightHand = (hand, groupSize) => {
