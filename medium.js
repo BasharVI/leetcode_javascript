@@ -43,6 +43,35 @@ while (result !== null) {
   result = result.next;
 }
 
+// 523. Continuous Subarray Sum
+
+const checkSubarraySum = (nums, k) => {
+  const map = new Map();
+  map.set(0, -1);
+  let runningSum = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    runningSum += nums[i];
+    let remainder = runningSum % k;
+
+    if (remainder < 0) remainder += k;
+
+    if (map.has(remainder)) {
+      if (i - map.get(remainder) >= 2) {
+        return true;
+      }
+    } else {
+      map.set(remainder, i);
+    }
+  }
+
+  return false;
+};
+
+const nums1 = [23, 2, 4, 6, 7];
+const k1 = 6;
+console.log(checkSubarraySum(nums1, k1));
+
 // 648. Replace Words
 
 const replaceWords = (dictionary, sentence) => {
