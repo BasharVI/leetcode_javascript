@@ -68,10 +68,6 @@ const checkSubarraySum = (nums, k) => {
   return false;
 };
 
-const nums1 = [23, 2, 4, 6, 7];
-const k1 = 6;
-console.log(checkSubarraySum(nums1, k1));
-
 // 648. Replace Words
 
 const replaceWords = (dictionary, sentence) => {
@@ -114,6 +110,32 @@ const isNStraightHand = (hand, groupSize) => {
   }
   return true;
 };
+
+// 974. Subarray Divisible by k
+
+const subarrayDivByK = (nums, k) => {
+  let count = 0;
+  let prefixSum = 0;
+  let reminderCount = new Map();
+  reminderCount.set(0, 1);
+  for (let num of nums) {
+    prefixSum += num;
+    let remainder = ((prefixSum % k) + k) % k;
+    if (reminderCount.has(remainder)) {
+      count += reminderCount.get(remainder);
+    }
+    reminderCount.set(remainder, (reminderCount.get(remainder) || 0) + 1);
+  }
+  return count;
+};
+
+let nums1 = [4, 5, 0, -2, -3, 1];
+let k1 = 5;
+console.log(subarrayDivByK(nums1, k1));
+
+const nums2 = [23, 2, 4, 6, 7];
+const k2 = 6;
+console.log(subarrayDivByK(nums2, k2));
 
 // 2486. Append Characters to strinng to make subsequence
 
