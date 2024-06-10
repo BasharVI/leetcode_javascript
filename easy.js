@@ -112,4 +112,16 @@ const commonChar = (words) => {
   return result;
 };
 
-console.log(commonChar(["bella", "label", "roller"]));
+// 1051. Hight Checker
+
+const heightChecker = (heights) => {
+  let expected = [...heights].sort((a, b) => a - b);
+
+  let mismatchCount = 0;
+  for (let i = 0; i < heights.length; i++) {
+    if (heights[i] !== expected[i]) {
+      mismatchCount += 1;
+    }
+  }
+  return mismatchCount;
+};
