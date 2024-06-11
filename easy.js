@@ -125,3 +125,26 @@ const heightChecker = (heights) => {
   }
   return mismatchCount;
 };
+
+// 1122. Realative Sort Array
+
+const relativeSortArray = (arr1, arr2) => {
+  const orderMap = {};
+  for (let i = 0; i < arr2.length; i++) {
+    orderMap[arr2[i]] = i;
+  }
+
+  arr1.sort((a, b) => {
+    if (a in orderMap && b in orderMap) {
+      return orderMap[a] - orderMap[b];
+    } else if (a in orderMap) {
+      return -1;
+    } else if (b in orderMap) {
+      return 1;
+    } else {
+      return a - b;
+    }
+  });
+
+  return arr1;
+};
