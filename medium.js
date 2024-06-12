@@ -43,6 +43,31 @@ while (result !== null) {
   result = result.next;
 }
 
+// 75. Sort Colors
+const sortColors = (nums) => {
+  // return nums.sort((a, b) => a - b);
+  let low = 0;
+  let mid = 0;
+  let high = nums.length - 1;
+
+  while (mid <= high) {
+    if (nums[mid] === 0) {
+      [nums[low], nums[mid]] = [nums[mid], nums[low]];
+      low++;
+      mid++;
+    } else if (nums[mid] === 1) {
+      mid++;
+    } else {
+      [nums[mid], nums[high]] = [nums[high], nums[mid]];
+      high--;
+    }
+  }
+};
+let nums = [2, 0, 2, 1, 1, 0];
+let nums2 = [2, 1, 0];
+sortColors(nums);
+sortColors(nums2);
+console.log(nums, nums2);
 // 523. Continuous Subarray Sum
 
 const checkSubarraySum = (nums, k) => {
@@ -128,14 +153,6 @@ const subarrayDivByK = (nums, k) => {
   }
   return count;
 };
-
-let nums1 = [4, 5, 0, -2, -3, 1];
-let k1 = 5;
-console.log(subarrayDivByK(nums1, k1));
-
-const nums2 = [23, 2, 4, 6, 7];
-const k2 = 6;
-console.log(subarrayDivByK(nums2, k2));
 
 // 2486. Append Characters to strinng to make subsequence
 
