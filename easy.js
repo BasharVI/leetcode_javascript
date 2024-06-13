@@ -62,6 +62,22 @@ const removeElement = (nums, val) => {
   return k;
 };
 
+// 121. Best Time To Buy and Sell Stock
+
+const maxProfit = (prices) => {
+  let maximumProfit = 0;
+  let minStockPrice = prices[0];
+  for (let i = 1; i < prices.length; i++) {
+    let currentProfit = prices[i] - minStockPrice;
+    if (prices[i] <= minStockPrice) {
+      minStockPrice = prices[i];
+    } else {
+      maximumProfit = Math.max(currentProfit, maximumProfit);
+    }
+  }
+  return maximumProfit;
+};
+
 // 344. Reverse a String
 
 const reverseString = (str) => {
