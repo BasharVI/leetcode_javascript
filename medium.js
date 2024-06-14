@@ -63,11 +63,7 @@ const sortColors = (nums) => {
     }
   }
 };
-let nums = [2, 0, 2, 1, 1, 0];
-let nums2 = [2, 1, 0];
-sortColors(nums);
-sortColors(nums2);
-console.log(nums, nums2);
+
 // 523. Continuous Subarray Sum
 
 const checkSubarraySum = (nums, k) => {
@@ -134,6 +130,23 @@ const isNStraightHand = (hand, groupSize) => {
     }
   }
   return true;
+};
+
+// 945. Minimum Increment to Make Array Unique
+
+const minIncrementForUnique = (nums) => {
+  let moves = 0;
+  let n = nums.length;
+  if (n <= 1) return 0;
+  nums.sort((a, b) => a - b);
+  for (let i = 1; i < n; i++) {
+    if (nums[i] <= nums[i - 1]) {
+      let increment = nums[i - 1] - nums[i] + 1;
+      nums[i] += increment;
+      moves += increment;
+    }
+  }
+  return moves;
 };
 
 // 974. Subarray Divisible by k
