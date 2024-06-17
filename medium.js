@@ -89,6 +89,25 @@ const checkSubarraySum = (nums, k) => {
   return false;
 };
 
+// 633. Sum of Square Numbers
+
+const judgeSquareSum = (c) => {
+  let a = 0;
+  let b = Math.floor(Math.sqrt(c));
+
+  while (a <= b) {
+    let squareSum = a * a + b * b;
+    if (squareSum === c) {
+      return true;
+    } else if (squareSum < c) {
+      a++;
+    } else {
+      b--;
+    }
+  }
+  return false;
+};
+
 // 648. Replace Words
 
 const replaceWords = (dictionary, sentence) => {
