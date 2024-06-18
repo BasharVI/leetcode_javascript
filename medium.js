@@ -123,6 +123,28 @@ const replaceWords = (dictionary, sentence) => {
   return words.join(" ");
 };
 
+// 826. Most Profit Assigning Work.
+
+const maxProfitAssignment = (difficulty, profit, worker) => {
+  let maxProfit = 0;
+  let currentProfit = 0;
+  let jobIndex = 0;
+  let jobs = [];
+  for (let i = 0; i < difficulty.length; i++) {
+    jobs.push([difficulty[i], profit[i]]);
+  }
+  jobs.sort((a, b) => a[0] - b[0]);
+  worker.sort((a, b) => a - b);
+  for (let i = 0; i < worker.length; i++) {
+    while (jobIndex < worker.length && worker[i] >= jobs[jobIndex][0]) {
+      currentProfit = Math.max(currentProfit, jobs[jobIndex][1]);
+      jobIndex++;
+    }
+    maxProfit += currentProfit;
+  }
+  return maxProfit;
+};
+
 // 846. Hand of Straights
 
 const isNStraightHand = (hand, groupSize) => {
