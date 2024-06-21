@@ -208,6 +208,40 @@ const subarrayDivByK = (nums, k) => {
   return count;
 };
 
+// 1052. Grumpy bookstore Owner
+
+const maxSatisfied = (customers, grumpy, minutes) => {
+  let totalSatisfied = 0;
+  for (let i = 0; i < customers.length; i++) {
+    if (!grumpy[i]) {
+      totalSatisfied += customers[i];
+    }
+  }
+
+  let additionalSatisfied = 0;
+  for (let i = 0; i < minutes; i++) {
+    if (grumpy[i]) {
+      additionalSatisfied += customers[i];
+    }
+  }
+
+  let maxAdditionalSatisfied = additionalSatisfied;
+  for (let i = minutes; i < customers.length; i++) {
+    if (grumpy[i]) {
+      additionalSatisfied += customers[i];
+    }
+    if (grumpy[i - minutes]) {
+      additionalSatisfied -= customers[i - minutes];
+    }
+    maxAdditionalSatisfied = Math.max(
+      maxAdditionalSatisfied,
+      additionalSatisfied
+    );
+  }
+
+  return totalSatisfied + maxAdditionalSatisfied;
+};
+
 // 1482. Minimum Number of Days to make m Bouquets
 
 const minDays = (bloomDay, m, k) => {
@@ -286,8 +320,6 @@ const maxDistance = (position, m) => {
 
   return result;
 };
-
-console.log(maxDistance([1, 2, 3, 4, 7], 3));
 
 // 2486. Append Characters to strinng to make subsequence
 
