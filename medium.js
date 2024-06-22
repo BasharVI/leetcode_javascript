@@ -242,6 +242,31 @@ const maxSatisfied = (customers, grumpy, minutes) => {
   return totalSatisfied + maxAdditionalSatisfied;
 };
 
+// 1248. Count number of nice subarrays
+
+const numberOfSubarrays = (nums, k) => {
+  let count = 0;
+  let currentOddCount = 0;
+  let prefixCounts = new Map();
+  prefixCounts.set(0, 1);
+
+  for (let num of nums) {
+    if (num % 2 !== 0) {
+      currentOddCount++;
+    }
+
+    if (prefixCounts.has(currentOddCount - k)) {
+      count += prefixCounts.get(currentOddCount - k);
+    }
+
+    if (!prefixCounts.has(currentOddCount)) {
+      prefixCounts.set(currentOddCount, 0);
+    }
+    prefixCounts.set(currentOddCount, prefixCounts.get(currentOddCount) + 1);
+  }
+
+  return count;
+};
 // 1482. Minimum Number of Days to make m Bouquets
 
 const minDays = (bloomDay, m, k) => {
