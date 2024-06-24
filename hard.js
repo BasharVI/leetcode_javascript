@@ -1,3 +1,23 @@
+// 330. patching Array
+
+const minPatches = (nums, n) => {
+  let patches = 0;
+  let miss = 1;
+  let i = 0;
+
+  while (miss <= n) {
+    if (i < nums.length && nums[i] <= miss) {
+      miss += nums[i];
+      i++;
+    } else {
+      miss += miss;
+      patches++;
+    }
+  }
+
+  return patches;
+};
+
 // 502. IPO
 
 const findMaximizedCapital = (k, w, profits, capital) => {
@@ -25,22 +45,28 @@ const findMaximizedCapital = (k, w, profits, capital) => {
   return w;
 };
 
-// 330. patching Array
+// 995. Minimum Number of K consecutive bit flips
 
-const minPatches = (nums, n) => {
-  let patches = 0;
-  let miss = 1;
-  let i = 0;
+const minKBitFlips = (nums, k) => {
+  let n = nums.length;
+  let flipCount = 0;
+  let flipped = new Array(n).fill(0);
+  let currentFlips = 0;
 
-  while (miss <= n) {
-    if (i < nums.length && nums[i] <= miss) {
-      miss += nums[i];
-      i++;
-    } else {
-      miss += miss;
-      patches++;
+  for (let i = 0; i < n; i++) {
+    if (i >= k) {
+      currentFlips -= flipped[i - k];
+    }
+
+    if ((nums[i] + currentFlips) % 2 === 0) {
+      if (i + k > n) {
+        return -1;
+      }
+      flipCount++;
+      currentFlips++;
+      flipped[i] = 1;
     }
   }
 
-  return patches;
+  return flipCount;
 };
