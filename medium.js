@@ -89,6 +89,33 @@ const checkSubarraySum = (nums, k) => {
   return false;
 };
 
+// 538. Convert BST to Greater Tree
+
+class TreeNode {
+  constructor(val, left, right) {
+    this.val = val === undefined ? 0 : val;
+    this.left = left === undefined ? null : left;
+    this.right = right === undefined ? null : right;
+  }
+}
+
+function convertBST(root) {
+  let sum = 0;
+
+  function traverse(node) {
+    if (node === null) {
+      return;
+    }
+    traverse(node.right);
+    sum += node.val;
+    node.val = sum;
+    traverse(node.left);
+  }
+
+  traverse(root);
+  return root;
+}
+
 // 633. Sum of Square Numbers
 
 const judgeSquareSum = (c) => {
@@ -207,6 +234,33 @@ const subarrayDivByK = (nums, k) => {
   }
   return count;
 };
+
+// 1038. Binary Search Tree to Greater Sum Tree
+
+class TreeNode {
+  constructor(val, left, right) {
+    this.val = val === undefined ? 0 : val;
+    this.left = left === undefined ? null : left;
+    this.right = right === undefined ? null : right;
+  }
+}
+
+function convertBST(root) {
+  let sum = 0;
+
+  function traverse(node) {
+    if (node === null) {
+      return;
+    }
+    traverse(node.right);
+    sum += node.val;
+    node.val = sum;
+    traverse(node.left);
+  }
+
+  traverse(root);
+  return root;
+}
 
 // 1052. Grumpy bookstore Owner
 
