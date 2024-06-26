@@ -322,6 +322,29 @@ const numberOfSubarrays = (nums, k) => {
   return count;
 };
 
+// 1382. Balance a Binary Search Tree
+const inOrderSort = (node, arr) => {
+  if (!node) return;
+  inOrderSort(node.left, arr);
+  arr.push(node.val);
+  inOrderSort(node.right, arr);
+};
+
+const buildBalancedBST = (arr, start, end) => {
+  if (start > end) return null;
+  const mid = Math.floor((start + end) / 2);
+  const node = new TreeNode(arr[mid]);
+  node.left = buildBalancedBST(arr, start, mid - 1);
+  node.right = buildBalancedBST(arr, mid + 1, end);
+  return node;
+};
+const balanceBST = (root) => {
+  let sortedArr = [];
+  inOrderSort(root, sortedArr);
+
+  return buildBalancedBST(sortedArr, 0, sortedArr.length - 1);
+};
+
 // 1438. Longest Continuous Subarray With Absolute Diff less than or Equal to Limit
 
 const longestSubarray = (nums, limit) => {
