@@ -165,6 +165,14 @@ const relativeSortArray = (arr1, arr2) => {
   return arr1;
 };
 
+// 1791. Find the center of a star graph
+
+const findCenter = (edges) => {
+  const [a, b] = edges[0];
+  const [c, d] = edges[1];
+  return a === c || a === d ? a : b;
+};
+
 // 2037. Minimum Number of Moves to Seat Everyone
 const minMovesToSeat = (seats, students) => {
   seats.sort((a, b) => a - b);
