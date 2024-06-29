@@ -466,6 +466,40 @@ const maxDistance = (position, m) => {
   return result;
 };
 
+// 2192. All ancestors of a Node in a Directed Acyclic Graph
+
+const getAncestors = (n, edges) => {
+  const graph = Array.from({ length: n }, () => []);
+  const inDegree = new Array(n).fill(0);
+
+  for (const [from, to] of edges) {
+    graph[from].push(to);
+    inDegree[to]++;
+  }
+
+  const queue = [];
+  const ancestors = Array.from({ length: n }, () => new Set());
+
+  for (let i = 0; i < n; i++) {
+    if (inDegree[i] === 0) queue.push(i);
+  }
+
+  while (queue.length) {
+    const node = queue.shift();
+    for (const neighbor of graph[node]) {
+      ancestors[neighbor].add(node);
+      for (const ancestor of ancestors[node]) {
+        ancestors[neighbor].add(ancestor);
+      }
+      if (--inDegree[neighbor] === 0) {
+        queue.push(neighbor);
+      }
+    }
+  }
+
+  return ancestors.map((set) => Array.from(set).sort((a, b) => a - b));
+};
+
 // 2285. Maimum Total Importance of Road
 const maximumImportance = () => {
   const degree = new Array(n).fill(0);
