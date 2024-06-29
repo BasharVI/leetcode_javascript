@@ -466,6 +466,24 @@ const maxDistance = (position, m) => {
   return result;
 };
 
+// 2285. Maimum Total Importance of Road
+const maximumImportance = () => {
+  const degree = new Array(n).fill(0);
+
+  for (const [a, b] of roads) {
+    degree[a]++;
+    degree[b]++;
+  }
+
+  degree.sort((a, b) => a - b);
+
+  let importance = 0;
+  for (let i = 0; i < n; i++) {
+    importance += degree[i] * (i + 1);
+  }
+
+  return importance;
+};
 // 2486. Append Characters to strinng to make subsequence
 
 const appendCharacters = (s, t) => {
