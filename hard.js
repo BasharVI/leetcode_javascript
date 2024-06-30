@@ -70,3 +70,78 @@ const minKBitFlips = (nums, k) => {
 
   return flipCount;
 };
+
+// 1579. Remove Max number of Edges to keep the graph fully traversable
+
+class UnionFind {
+  constructor(n) {
+    this.parent = Array(n)
+      .fill()
+      .map((_, i) => i);
+    this.rank = Array(n).fill(0);
+    this.components = n;
+  }
+
+  find(x) {
+    if (this.parent[x] !== x) {
+      this.parent[x] = this.find(this.parent[x]);
+    }
+    return this.parent[x];
+  }
+
+  union(x, y) {
+    let rootX = this.find(x);
+    let rootY = this.find(y);
+    if (rootX !== rootY) {
+      if (this.rank[rootX] < this.rank[rootY]) {
+        [rootX, rootY] = [rootY, rootX];
+      }
+      this.parent[rootY] = rootX;
+      if (this.rank[rootX] === this.rank[rootY]) {
+        this.rank[rootX]++;
+      }
+      this.components--;
+      return true;
+    }
+    return false;
+  }
+}
+
+function maxNumEdgesToRemove(n, edges) {
+  const alice = new UnionFind(n);
+  const bob = new UnionFind(n);
+  let removableEdges = 0;
+  let addedEdges = 0;
+
+  edges.sort((a, b) => b[0] - a[0]);
+
+  for (const [type, u, v] of edges) {
+    if (type === 3) {
+      const addedAlice = alice.union(u - 1, v - 1);
+      const addedBob = bob.union(u - 1, v - 1);
+      if (addedAlice || addedBob) {
+        addedEdges++;
+      } else {
+        removableEdges++;
+      }
+    } else if (type === 1) {
+      if (alice.union(u - 1, v - 1)) {
+        addedEdges++;
+      } else {
+        removableEdges++;
+      }
+    } else {
+      if (bob.union(u - 1, v - 1)) {
+        addedEdges++;
+      } else {
+        removableEdges++;
+      }
+    }
+  }
+
+  if (alice.components !== 1 || bob.components !== 1) {
+    return -1;
+  }
+
+  return removableEdges;
+}
