@@ -165,6 +165,21 @@ const relativeSortArray = (arr1, arr2) => {
   return arr1;
 };
 
+// 1550. Three consecutive Odds
+
+const threeConsecutiveOdds = (arr) => {
+  let consecutiveOddCount = 0;
+  for (let num of arr) {
+    if (num % 2 !== 0) {
+      consecutiveOddCount++;
+      if (consecutiveOddCount === 3) return true;
+    } else {
+      consecutiveOddCount = 0;
+    }
+  }
+  return false;
+};
+
 // 1791. Find the center of a star graph
 
 const findCenter = (edges) => {
