@@ -198,3 +198,40 @@ const minMovesToSeat = (seats, students) => {
   }
   return sum;
 };
+
+// 3200. Maximum Height of a Triangle
+
+const maxHeightOfTriangle = (red, blue) => {
+  const maxTriangleHeight = (startingColor, otherColor) => {
+    let maxHeight = 0;
+    let usedStartingColor = 0;
+    let usedOtherColor = 0;
+    let height = 0;
+
+    while (true) {
+      height++;
+      if (height % 2 === 1) {
+        usedStartingColor += height;
+        if (usedStartingColor <= startingColor) {
+          maxHeight++;
+        } else {
+          break;
+        }
+      } else {
+        usedOtherColor += height;
+        if (usedOtherColor <= otherColor) {
+          maxHeight++;
+        } else {
+          break;
+        }
+      }
+    }
+
+    return maxHeight;
+  };
+
+  const maxRedTriangleHeight = maxTriangleHeight(red, blue);
+  const maxBlueTriangleHeight = maxTriangleHeight(blue, red);
+
+  return Math.max(maxRedTriangleHeight, maxBlueTriangleHeight);
+};
