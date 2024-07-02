@@ -92,6 +92,23 @@ const reverseString = (str) => {
   return str;
 };
 
+// 350. Intersection of Two Arrays ||
+
+const intersect = (num1, num2) => {
+  const map = new Map();
+  for (let nums of num1) {
+    map.set(nums, (map.get(nums) || 0) + 1);
+  }
+  let output = [];
+  for (let i = 0; i < num2.length; i++) {
+    if (map.has(num2[i]) && map.get(num2[i]) > 0) {
+      output.push(num2[i]);
+      map.set(num2[i], map.get(num2[i]) - 1);
+    }
+  }
+  return output;
+};
+
 // 409. Longest Palindrome
 
 const longestPalindrome = (s) => {
