@@ -237,14 +237,6 @@ const subarrayDivByK = (nums, k) => {
 
 // 1038. Binary Search Tree to Greater Sum Tree
 
-class TreeNode {
-  constructor(val, left, right) {
-    this.val = val === undefined ? 0 : val;
-    this.left = left === undefined ? null : left;
-    this.right = right === undefined ? null : right;
-  }
-}
-
 function convertBST(root) {
   let sum = 0;
 
@@ -427,6 +419,18 @@ const minDays = (bloomDay, m, k) => {
   }
 
   return left;
+};
+
+// 1509. Minimum Difference Between Largest and Smallest Value in Three Moves
+
+const minDifference = (nums) => {
+  if (nums.length <= 4) return 0;
+  nums.sort((a, b) => a - b);
+  let minDiff = Infinity;
+  for (let i = 0; i <= 3; i++) {
+    minDiff = Math.min(minDiff, nums[nums.length - 4 + i] - nums[i]);
+  }
+  return minDiff;
 };
 
 // 1552. Magnetic force between two balls
