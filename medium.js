@@ -470,6 +470,23 @@ const maxDistance = (position, m) => {
   return result;
 };
 
+// 2181. Merge Nodes in Between Zeros
+
+const mergeNodes = (head) => {
+  let node = head;
+  while (node.next) {
+    node.val += node.next.val;
+    node.next = node.next.next;
+    if (node.next.next === null) {
+      node.next = null;
+      return head;
+    }
+    if (node.next && node.next.val === 0) {
+      node = node.next;
+    }
+  }
+};
+
 // 2192. All ancestors of a Node in a Directed Acyclic Graph
 
 const getAncestors = (n, edges) => {
