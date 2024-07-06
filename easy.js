@@ -216,6 +216,19 @@ const minMovesToSeat = (seats, students) => {
   return sum;
 };
 
+// 2582. Pass the Pillow
+
+const passThePillow = (n, time) => {
+  const fullCycle = 2 * (n - 1);
+  const position = time % fullCycle;
+
+  if (position < n - 1) {
+    return position + 1;
+  } else {
+    return n - (position - (n - 1));
+  }
+};
+
 // 3200. Maximum Height of a Triangle
 
 const maxHeightOfTriangle = (red, blue) => {
