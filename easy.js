@@ -182,6 +182,22 @@ const relativeSortArray = (arr1, arr2) => {
   return arr1;
 };
 
+// 1518. Water Bottles
+
+const numWaterBottles = (numBottles, numExchange) => {
+  let totalDrunk = numBottles;
+  let emptyBottles = numBottles;
+
+  while (emptyBottles >= numExchange) {
+    const newFullBottles = Math.floor(emptyBottles / numExchange);
+    totalDrunk += newFullBottles;
+
+    emptyBottles = (emptyBottles % numExchange) + newFullBottles;
+  }
+
+  return totalDrunk;
+};
+
 // 1550. Three consecutive Odds
 
 const threeConsecutiveOdds = (arr) => {
