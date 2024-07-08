@@ -470,6 +470,13 @@ const maxDistance = (position, m) => {
   return result;
 };
 
+// 1823. Find the Winner of the circular game
+
+const findTheWinner = (n, k) => {
+  if (n === 1) return 1;
+  return ((findTheWinner(n - 1, k) + k - 1) % n) + 1;
+};
+
 // 2058. Find the minimum and maximum number of nodes between critical points
 
 var nodesBetweenCriticalPoints = function (head) {
