@@ -470,6 +470,27 @@ const maxDistance = (position, m) => {
   return result;
 };
 
+// 1701. Average Waiting Time
+
+const averageWaitingTime = (customers) => {
+  let totalWaitingTime = 0;
+  let chefFreeTime = 0;
+
+  for (const [arrivalTime, prepTime] of customers) {
+    chefFreeTime = Math.max(chefFreeTime, arrivalTime);
+
+    const finishTime = chefFreeTime + prepTime;
+
+    const waitingTime = finishTime - arrivalTime;
+
+    totalWaitingTime += waitingTime;
+
+    chefFreeTime = finishTime;
+  }
+
+  return totalWaitingTime / customers.length;
+};
+
 // 1823. Find the Winner of the circular game
 
 const findTheWinner = (n, k) => {
