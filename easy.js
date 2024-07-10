@@ -213,6 +213,22 @@ const threeConsecutiveOdds = (arr) => {
   return false;
 };
 
+// 1598. Crawler Log Folder
+
+const minOperations = (logs) => {
+  let depth = 0;
+
+  for (let operation of logs) {
+    if (operation === "../") {
+      depth = Math.max(0, depth - 1);
+    } else if (operation !== "./") {
+      depth++;
+    }
+  }
+
+  return depth;
+};
+
 // 1791. Find the center of a star graph
 
 const findCenter = (edges) => {

@@ -470,22 +470,6 @@ const maxDistance = (position, m) => {
   return result;
 };
 
-// 1598. Crawler Log Folder
-
-const minOperations = (logs) => {
-  let depth = 0;
-
-  for (let operation of logs) {
-    if (operation === "../") {
-      depth = Math.max(0, depth - 1);
-    } else if (operation !== "./") {
-      depth++;
-    }
-  }
-
-  return depth;
-};
-
 // 1701. Average Waiting Time
 
 const averageWaitingTime = (customers) => {
