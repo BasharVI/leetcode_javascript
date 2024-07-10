@@ -494,13 +494,9 @@ const averageWaitingTime = (customers) => {
 
   for (const [arrivalTime, prepTime] of customers) {
     chefFreeTime = Math.max(chefFreeTime, arrivalTime);
-
     const finishTime = chefFreeTime + prepTime;
-
     const waitingTime = finishTime - arrivalTime;
-
     totalWaitingTime += waitingTime;
-
     chefFreeTime = finishTime;
   }
 
