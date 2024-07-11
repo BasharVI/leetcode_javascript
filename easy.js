@@ -229,6 +229,24 @@ const minOperations = (logs) => {
   return depth;
 };
 
+// 1614. Maximum Nesting Depth of parantheses
+
+const maxDepth = (s) => {
+  let maxDepth = 0;
+  let currentDepth = 0;
+
+  for (let char of s) {
+    if (char === "(") {
+      currentDepth++;
+      maxDepth = Math.max(maxDepth, currentDepth);
+    } else if (char === ")") {
+      currentDepth--;
+    }
+  }
+
+  return maxDepth;
+};
+
 // 1791. Find the center of a star graph
 
 const findCenter = (edges) => {

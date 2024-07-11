@@ -288,6 +288,25 @@ const maxSatisfied = (customers, grumpy, minutes) => {
   return totalSatisfied + maxAdditionalSatisfied;
 };
 
+// 1190. Reverse Substrings Between Each pair of parantheses
+
+const reverseParentheses = (s) => {
+  const stack = [""];
+
+  for (let char of s) {
+    if (char === "(") {
+      stack.push("");
+    } else if (char === ")") {
+      let reversed = stack.pop().split("").reverse().join("");
+      stack[stack.length - 1] += reversed;
+    } else {
+      stack[stack.length - 1] += char;
+    }
+  }
+
+  return stack[0];
+};
+
 // 1248. Count number of nice subarrays
 
 const numberOfSubarrays = (nums, k) => {
