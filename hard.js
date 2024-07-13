@@ -145,3 +145,56 @@ function maxNumEdgesToRemove(n, edges) {
 
   return removableEdges;
 }
+
+// 2751. Robot Collision
+
+const survivedRobotsHealths = (positions, healths, directions) => {
+  const n = positions.length;
+  const robots = positions.map((pos, i) => ({
+    id: i,
+    pos: pos,
+    health: healths[i],
+    dir: directions[i],
+  }));
+
+  robots.sort((a, b) => a.pos - b.pos);
+
+  const stack = [];
+
+  for (const robot of robots) {
+    if (robot.dir === "R") {
+      stack.push(robot);
+    } else {
+      while (
+        stack.length &&
+        stack[stack.length - 1].dir === "R" &&
+        stack[stack.length - 1].health <= robot.health
+      ) {
+        const top = stack.pop();
+        if (top.health === robot.health) {
+          robot.health = 0;
+          break;
+        }
+        robot.health--;
+      }
+
+      if (robot.health > 0) {
+        if (stack.length && stack[stack.length - 1].dir === "R") {
+          stack[stack.length - 1].health--;
+          if (stack[stack.length - 1].health === 0) {
+            stack.pop();
+          }
+        } else {
+          stack.push(robot);
+        }
+      }
+    }
+  }
+
+  const result = new Array(n).fill(0);
+  for (const robot of stack) {
+    result[robot.id] = robot.health;
+  }
+
+  return result.filter((health) => health > 0);
+};
