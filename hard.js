@@ -45,6 +45,48 @@ const findMaximizedCapital = (k, w, profits, capital) => {
   return w;
 };
 
+// 726. Number of Atoms
+const countOfAtoms = (formula) => {
+  let stack = [{}];
+  let i = 0;
+  const n = formula.length;
+
+  while (i < n) {
+    if (formula[i] === "(") {
+      stack.push({});
+      i++;
+    } else if (formula[i] === ")") {
+      let top = stack.pop();
+      i++;
+      let iStart = i;
+      while (i < n && /\d/.test(formula[i])) i++;
+      let num = formula.slice(iStart, i) || 1;
+      for (let name in top) {
+        stack[stack.length - 1][name] =
+          (stack[stack.length - 1][name] || 0) + top[name] * num;
+      }
+    } else {
+      let iStart = i;
+      i++;
+      while (i < n && formula[i] >= "a" && formula[i] <= "z") i++;
+      let name = formula.slice(iStart, i);
+      iStart = i;
+      while (i < n && /\d/.test(formula[i])) i++;
+      let num = formula.slice(iStart, i) || 1;
+      stack[stack.length - 1][name] =
+        (stack[stack.length - 1][name] || 0) + Number(num);
+    }
+  }
+
+  let res = stack[0];
+  let sorted = Object.keys(res).sort();
+  let ans = "";
+  for (let name of sorted) {
+    ans += name + (res[name] > 1 ? res[name] : "");
+  }
+  return ans;
+};
+
 // 995. Minimum Number of K consecutive bit flips
 
 const minKBitFlips = (nums, k) => {
